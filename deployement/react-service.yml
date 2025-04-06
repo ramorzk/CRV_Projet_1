@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-redis-front-service
+spec:
+  selector:
+    app: node-redis-front
+  ports:
+    - protocol: TCP
+      port: 80           # Port exposé dans le cluster
+      targetPort: 80   # Port du conteneur
+      nodePort: 32337    # NodePort pour accéder de l'extérieur
+  type: LoadBalancer     # <-- Corrigé (pas d'espace invisible ou caractère spécial)

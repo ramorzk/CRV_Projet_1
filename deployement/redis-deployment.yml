@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+    spec:
+      containers:
+        - name: redis-container
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-replica
+  labels:
+    app: redis-replica
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-replica
+  template:
+    metadata:
+      labels:
+        app: redis-replica
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.4.2
+          ports:
+            - containerPort: 6379
+          command:
+            - "redis-server"
+            - "--replicaof"
+            - "redis.default.svc.cluster.local"
+            - "6379"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: redis-pvc

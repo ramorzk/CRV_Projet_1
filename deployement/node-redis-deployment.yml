@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-redis
+  labels:
+    app: node-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-redis
+  template:
+    metadata:
+      labels:
+        app: node-redis
+    spec:
+      containers:
+        - name: node-redis-server
+          imagePullPolicy: Never
+          image: node-redis-server:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: '8080'
+            - name: REDIS_URL
+              value: redis://redis.default.svc.cluster.local:6379
+            - name: REDIS_REPLICAS_URL
+              value: redis://redis.default.svc.cluster.local:6379
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
