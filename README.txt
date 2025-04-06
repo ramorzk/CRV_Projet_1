@@ -1,6 +1,6 @@
+NB : Les fichiers du  ZIP et du depot github sont organisé un peu différemment.
 
-
-# Projet Kubernetes avec Minikube, Prometheus, Grafana, Redis et Node.js
+# Projet Kubernetes avec Minikube, Prometheus, Grafana, Redis et Node.js, OMAR REZKELLAH
 
 ## Prérequis
 
@@ -117,12 +117,15 @@ Le projet est structuré de la manière suivante :
 ```
 .
 ├── deploy.sh                          # Script d'automatisation pour déployer l'infrastructure
-├── redis-node
-├── redis-react
+├── redis-node                         # Contient le code source, les fichiers JavaScript et le Dockerfile pour 					le backend Node.js connecté à Redis.
+├── redis-react			       # Contient le code source, les composants React et le Dockerfile pour le 					frontend de l’application.
 ├── deployement
 	├── redis-deployment.yml               # Déploiement de Redis (master et réplicas)
 	├── node-redis-deployment.yml          # Déploiement du backend Node-Redis
 	├── react-deployment.yml               # Déploiement du frontend React
+	├── redis-service.yml                  # Service redis
+	├── node-redis-service.yml             # Service back-end
+	├── react-service.yml                  # Service front-end
 	├── redis-hpa.yml                      # Horizontal Pod Autoscaler pour Redis
 	├── node-redis-hpa.yml                 # Horizontal Pod Autoscaler pour Node-Redis
 	├── react-hpa.yml                      # Horizontal Pod Autoscaler pour React
@@ -131,7 +134,9 @@ Le projet est structuré de la manière suivante :
 	├── prometheus-service.yml             # Service Kubernetes pour Prometheus
 	├── grafana-deployment.yml             # Déploiement de Grafana
 	├── grafana-service.yml                # Service Kubernetes pour Grafana
-└── README.md                          # Ce fichier
+	├── restart-all.sh		       # Script bash pour redémarrer tous les déploiements Kubernetes 
+	├── redis-pv-pvc.yml                   #Définition des volumes persistants (PV) et des revendications de 						volumes (PVC) pour Redis.
+└── README.md                          
 ```
 
 
