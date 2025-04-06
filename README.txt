@@ -2,7 +2,6 @@
 
 # Projet Kubernetes avec Minikube, Prometheus, Grafana, Redis et Node.js
 
-
 ## Prérequis
 
 Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
@@ -10,6 +9,37 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 - **Docker** : pour la gestion des containers et des images Docker.
 - **Minikube** : pour gérer un cluster Kubernetes local.
 - **kubectl** : l'outil en ligne de commande pour interagir avec Kubernetes.
+
+
+## Script d'automatisation
+
+Pour simplifier le processus de déploiement, un script Bash (`deploy.sh`) est fourni. Ce script exécute automatiquement toutes les étapes du projet, y compris :
+
+- Démarrage de Minikube
+- Chargement des images Docker
+- Application des fichiers de déploiement Kubernetes
+- Vérification des services et des pods
+- Lancement de Minikube Tunnel
+- Affichage des URL des services
+
+### Exécution du script
+
+Pour exécuter le script, procédez comme suit :
+
+1. Clonez ce dépôt et placez-vous dans le répertoire du projet.
+2. Donnez les permissions d'exécution au script :
+   ```bash
+   chmod +x deploy.sh
+   ```
+3. Exécutez le script avec la commande suivante :
+   ```bash
+   ./deploy.sh
+   ```
+
+
+
+
+
 
 
 ## Étapes d'installation et de déploiement
@@ -78,30 +108,7 @@ Vous pouvez maintenant accéder aux services via les URL suivantes :
 
 Accédez à Prometheus et Grafana via leurs URL respectives. Prometheus scrappera les métriques des services Node-Redis et Redis, et Grafana vous permettra de visualiser ces métriques de manière graphique.
 
-## Script d'automatisation
 
-Pour simplifier le processus de déploiement, un script Bash (`deploy.sh`) est fourni. Ce script exécute automatiquement toutes les étapes du projet, y compris :
-
-- Démarrage de Minikube
-- Chargement des images Docker
-- Application des fichiers de déploiement Kubernetes
-- Vérification des services et des pods
-- Lancement de Minikube Tunnel
-- Affichage des URL des services
-
-### Exécution du script
-
-Pour exécuter le script, procédez comme suit :
-
-1. Clonez ce dépôt et placez-vous dans le répertoire du projet.
-2. Donnez les permissions d'exécution au script :
-   ```bash
-   chmod +x deploy.sh
-   ```
-3. Exécutez le script avec la commande suivante :
-   ```bash
-   ./deploy.sh
-   ```
 
 ## Structure du projet
 
